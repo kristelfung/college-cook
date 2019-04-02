@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './Home';
+import CollegeCook from './CollegeCook';
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(<CollegeCook />, document.getElementById('root'));
