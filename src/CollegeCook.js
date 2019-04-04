@@ -9,7 +9,8 @@ class CollegeCook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipes: []
+      recipes: [],
+      loading: true
     }
   }
 
@@ -18,16 +19,23 @@ class CollegeCook extends Component {
     accessToken: process.env.REACT_APP_ACCESS_TOKEN
   })
   componentDidMount() {
+    this.setState({ loading: true })
     this.fetchPosts().then(this.setPosts);
   }
   fetchPosts = () => this.client.getEntries()
   setPosts = response => {
     this.setState({
-      recipes: response.items
+      recipes: response.items,
+      loading: false
     })
   }
 
   render () {
+    if (this.state.loading) {
+      return (
+        <p>loading</p>
+      )
+    }
     return (
       <div>
         <Router>
@@ -36,6 +44,9 @@ class CollegeCook extends Component {
           <Route exact path="/" component={Home}/>
           <Route path="/faq/" component={FAQ}/>
         </Router>
+        {this.state.recipes.map(({fields}, i) => 
+        <p key={i}>{fields.name}</p>
+        )}
       </div>
     )
   }
