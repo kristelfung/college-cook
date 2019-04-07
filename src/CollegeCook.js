@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import * as contentful from 'contentful';
 import Home from './Home';
 import FAQ from './FAQ';
+import logo from './images/logo.svg';
 import "./scss/styles.scss";
 
 class CollegeCook extends Component {
@@ -42,22 +43,19 @@ class CollegeCook extends Component {
           <nav className="navbar">
             <div className="container">
               <div class="navbar__left">
-                <span className="navbar__item">LOGO</span>
+                <img src={logo} className="logo" alt="logo"/>
+                <span className="logo-text">collegecook</span>
               </div>
               <div className="navbar__right">
                 <Link to="/" className="navbar__item">Home</Link>
                 <Link to="/faq/" className="navbar__item">FAQ</Link>
+                <Link to="/submit/" className="navbar__item button button--primary">Submit a recipe</Link>
               </div>
             </div>
           </nav>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={() => (<Home recipes={this.state.recipes} />)}/>
           <Route path="/faq/" component={FAQ}/>
         </Router>
-        {this.state.recipes.map(({fields}, i) => 
-          <div>
-            <p key={i}>{fields.name}</p>
-          </div>
-        )}
       </div>
     )
   }
