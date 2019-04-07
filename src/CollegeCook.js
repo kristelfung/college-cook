@@ -39,13 +39,24 @@ class CollegeCook extends Component {
     return (
       <div>
         <Router>
-          <Link to="/">Home</Link>
-          <Link to="/faq/">FAQ</Link>
+          <nav className="navbar">
+            <div className="container">
+              <div class="navbar__left">
+                <span className="navbar__item">LOGO</span>
+              </div>
+              <div className="navbar__right">
+                <Link to="/" className="navbar__item">Home</Link>
+                <Link to="/faq/" className="navbar__item">FAQ</Link>
+              </div>
+            </div>
+          </nav>
           <Route exact path="/" component={Home}/>
           <Route path="/faq/" component={FAQ}/>
         </Router>
         {this.state.recipes.map(({fields}, i) => 
-        <p key={i}>{fields.name}</p>
+          <div>
+            <p key={i}>{fields.name}</p>
+          </div>
         )}
       </div>
     )
