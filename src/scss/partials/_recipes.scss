@@ -1,0 +1,18 @@
+.row--recipes {
+  padding: 20px 0px;
+}
+
+.recipe-card {
+  background-color: grey;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+  color: $white;
+  font-weight: 700;
+  height: 150px;
+  // vertically center content
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -9,10 +9,12 @@ const Home = (props) => {
           <p>Affordable recipes that use the least amount of ingredients 
           and cookware possible.</p>
         </div>
-        {props.recipes.map(({fields}, i) => 
-          <RecipeCard data={fields} key={i}>
-          </RecipeCard>
-        )}
+        <div className="row row--recipes">
+          {props.recipes.map(({fields}, i) => 
+            <RecipeCard data={fields} key={i}>
+            </RecipeCard>
+          )}
+        </div>
       </div>
     );
 }
