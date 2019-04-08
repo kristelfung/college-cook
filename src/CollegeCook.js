@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import * as contentful from 'contentful';
 import Home from './Home';
 import FAQ from './FAQ';
+import Submit from './Submit';
 import logo from './images/logo.svg';
 import "./scss/styles.scss";
 
@@ -43,8 +44,10 @@ class CollegeCook extends Component {
           <nav className="navbar">
             <div className="container">
               <div className="navbar__left">
-                <img src={logo} className="logo" alt="logo"/>
-                <span className="logo-text">collegecook</span>
+                <a href="/" className="logo">
+                  <img src={logo} className="logo__image" alt="logo"/>
+                  <span className="logo__text">collegecook</span>
+                </a>
               </div>
               <div className="navbar__right">
                 <Link to="/" className="navbar__item">Home</Link>
@@ -55,6 +58,7 @@ class CollegeCook extends Component {
           </nav>
           <Route exact path="/" component={() => (<Home recipes={this.state.recipes} />)}/>
           <Route path="/faq/" component={FAQ}/>
+          <Route path="/submit/" component={Submit}/>
         </Router>
       </div>
     )

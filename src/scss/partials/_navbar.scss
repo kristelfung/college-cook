@@ -5,15 +5,22 @@
 
   .container { // specific for navbar container
     display: flex;
+    width: 100%;
     align-items: center;
   }
 }
 
 .logo {
+  text-decoration: none;
+  display: flex;
+  color: inherit;
+}
+
+.logo__image {
   height: 25px;
 }
 
-.logo-text {
+.logo__text {
   margin: 0px 5px;
 }
 
