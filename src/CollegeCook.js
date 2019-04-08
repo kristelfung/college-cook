@@ -4,6 +4,7 @@ import * as contentful from 'contentful';
 import Home from './Home';
 import FAQ from './FAQ';
 import Submit from './Submit';
+import Recipe from './Recipe';
 import logo from './images/logo.svg';
 import "./scss/styles.scss";
 
@@ -31,6 +32,10 @@ class CollegeCook extends Component {
       loading: false
     })
   }
+  
+  urlify = (name) => {
+    return name.replace(/\s+/g, '-').toLowerCase();
+  }
 
   render () {
     if (this.state.loading) {
@@ -44,7 +49,7 @@ class CollegeCook extends Component {
           <nav className="navbar">
             <div className="container">
               <div className="navbar__left">
-                <a href="/" className="logo">
+                <a href="/" className="link-wrapper logo">
                   <img src={logo} className="logo__image" alt="logo"/>
                   <span className="logo__text">collegecook</span>
                 </a>
@@ -59,6 +64,11 @@ class CollegeCook extends Component {
           <Route exact path="/" component={() => (<Home recipes={this.state.recipes} />)}/>
           <Route path="/faq/" component={FAQ}/>
           <Route path="/submit/" component={Submit}/>
+          {this.state.recipes.map(({fields}, i) =>
+            <Route path={"/" + this.urlify(fields.name) + "/"} 
+              component={() => (<Recipe recipe={fields}/>)}
+              key={i}/>
+          )}
         </Router>
       </div>
     )

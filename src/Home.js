@@ -11,7 +11,7 @@ const Home = (props) => {
         </div>
         <div className="row row--recipes">
           {props.recipes.map(({fields}, i) => 
-            <RecipeCard data={fields} key={i}>
+            <RecipeCard recipe={fields} key={i}>
             </RecipeCard>
           )}
         </div>

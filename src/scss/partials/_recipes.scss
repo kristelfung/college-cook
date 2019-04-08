@@ -3,7 +3,6 @@
 }
 
 .recipe-card {
-  background-color: grey;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
@@ -11,6 +10,8 @@
   color: $white;
   font-weight: 700;
   height: 150px;
+  background-position: center center;
+  background-size: cover;
   // vertically center content
   display: flex;
   flex-direction: column;
