@@ -1,4 +1,5 @@
 import React from 'react';
+import RecipeCard from './RecipeCard';
 
 const Home = (props) => {
     return (
@@ -9,9 +10,8 @@ const Home = (props) => {
           and cookware possible.</p>
         </div>
         {props.recipes.map(({fields}, i) => 
-          <div>
-            <p key={i}>{fields.name}</p>
-          </div>
+          <RecipeCard data={fields} key={i}>
+          </RecipeCard>
         )}
       </div>
     );

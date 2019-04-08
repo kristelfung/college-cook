@@ -42,7 +42,7 @@ class CollegeCook extends Component {
         <Router>
           <nav className="navbar">
             <div className="container">
-              <div class="navbar__left">
+              <div className="navbar__left">
                 <img src={logo} className="logo" alt="logo"/>
                 <span className="logo-text">collegecook</span>
               </div>
