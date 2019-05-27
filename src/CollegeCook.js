@@ -13,7 +13,7 @@ class CollegeCook extends Component {
     super(props);
     this.state = {
       recipes: [],
-      faq: [],
+      faq: {},
       loading: true
     }
   }
@@ -30,7 +30,7 @@ class CollegeCook extends Component {
   setPosts = response => {
     this.setState({
       recipes: response.items.filter(item => item.sys.contentType.sys.id == "recipe"),
-      faq: response.items.filter(item => item.sys.contentType.sys.id == "faq"),
+      faq: response.items.find(item => item.sys.contentType.sys.id == "faq"),
       loading: false
     })
   }
@@ -64,7 +64,7 @@ class CollegeCook extends Component {
             </div>
           </nav>
           <Route exact path="/" component={() => (<Home recipes={this.state.recipes} />)}/>
-          <Route path="/faq/" component={FAQ}/>
+          <Route path="/faq/" component={() => (<FAQ data={this.state.faq.fields} />)}/>
           <Route path="/submit/" component={Submit}/>
         </Router>
       </div>

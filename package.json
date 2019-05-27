@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^13.2.0",
     "contentful": "^7.5.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.6",
