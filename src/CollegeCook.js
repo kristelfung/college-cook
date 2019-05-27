@@ -13,6 +13,7 @@ class CollegeCook extends Component {
     super(props);
     this.state = {
       recipes: [],
+      faq: [],
       loading: true
     }
   }
@@ -28,7 +29,8 @@ class CollegeCook extends Component {
   fetchPosts = () => this.client.getEntries()
   setPosts = response => {
     this.setState({
-      recipes: response.items,
+      recipes: response.items.filter(item => item.sys.contentType.sys.id == "recipe"),
+      faq: response.items.filter(item => item.sys.contentType.sys.id == "faq"),
       loading: false
     })
   }
@@ -64,11 +66,6 @@ class CollegeCook extends Component {
           <Route exact path="/" component={() => (<Home recipes={this.state.recipes} />)}/>
           <Route path="/faq/" component={FAQ}/>
           <Route path="/submit/" component={Submit}/>
-          {this.state.recipes.map(({fields}, i) =>
-            <Route path={"/" + this.urlify(fields.name) + "/"} 
-              component={() => (<Recipe recipe={fields}/>)}
-              key={i}/>
-          )}
         </Router>
       </div>
     )

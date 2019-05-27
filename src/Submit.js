@@ -2,7 +2,7 @@ import React from 'react';
 
 const Submit = () => {
   return (
-    <div>submit</div>
+    <div className="container">submit</div>
   )
 }
 
