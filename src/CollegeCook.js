@@ -29,8 +29,8 @@ class CollegeCook extends Component {
   fetchPosts = () => this.client.getEntries()
   setPosts = response => {
     this.setState({
-      recipes: response.items.filter(item => item.sys.contentType.sys.id == "recipe"),
-      faq: response.items.find(item => item.sys.contentType.sys.id == "faq"),
+      recipes: response.items.filter(item => item.sys.contentType.sys.id === "recipe"),
+      faq: response.items.find(item => item.sys.contentType.sys.id === "faq"),
       loading: false
     })
   }

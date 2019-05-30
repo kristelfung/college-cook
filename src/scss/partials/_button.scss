@@ -1,9 +1,25 @@
 .button {
   border-radius: 5px;
   padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s ease 0s;
 }
 
 .button--primary {
   background-color: $orange;
   color: $white;
+}
+
+.button--primary:hover {
+  background-color: darken($orange, 10%);
+}
+
+.button--secondary {
+  background-color: $grey;
+  color: $black;
+}
+
+.button--secondary:hover {
+  background-color: darken($grey, 10%);
 }
