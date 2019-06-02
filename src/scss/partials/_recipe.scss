@@ -28,6 +28,7 @@
 
 .recipe-title {
   display: flex;
+  padding: 20px 0px;
 
   h1 {
     margin: 0;
@@ -44,8 +45,19 @@
 }
 
 .recipe-details {
+  display: flex;
   padding: 0px 15px;
-  // flex: 0 0 100%;
+
+  p {
+    margin: 0px;
+    width: 30%;
+  }
+
+  span {
+    font-size: 25px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
 }
 
 @media screen and (max-width: $small-screen) {
