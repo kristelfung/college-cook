@@ -72,13 +72,16 @@
   .recipe-title {
     display: block;
   }
+
   .recipe-img-wrap {
     width: 30%;
   }
+
   .recipe-title {
     width: 70%;
     padding: 15px;
     box-sizing: border-box;
+    margin-bottom: 0px;
 
     h1 {
       padding-left: 0px;
@@ -91,6 +94,16 @@
 
     .like {
       margin: 8px 0px;
+    }
+  }
+
+  .recipe-details {
+    justify-content: center; 
+    width: 100%;
+
+    p {
+      width: inherit;
+      flex-grow: 1;
     }
   }
 }

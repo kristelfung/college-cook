@@ -34,8 +34,25 @@ class Recipe extends Component {
               <button className="like">15</button>
           </div>
           <div className="recipe-details">
-            <p>a;small</p>
-          </div>
+              <p>
+                <span role="img" aria-label="clock">⏰</span>
+                {this.props.recipe.time} mins
+              </p>
+              <p>
+                <span role="img" aria-label="money">💸</span>
+                ${this.props.recipe.cost} USD per serving
+              </p>
+            </div>
+            <div className="recipe-details">
+              <p>
+                <span role="img" aria-label="plate">🍽️</span>
+                {this.props.recipe.servings} servings
+              </p>
+              <p>
+                <span role="img" aria-label="food">🥘</span>
+                {this.props.recipe.cookwareToWash} cookware to wash
+              </p>
+            </div>
         </div>
       ]
     }
