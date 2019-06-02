@@ -28,7 +28,7 @@
 
 .recipe-title {
   display: flex;
-  padding: 20px 0px;
+  margin-bottom: 20px;
 
   h1 {
     margin: 0;
@@ -57,6 +57,14 @@
     font-size: 25px;
     vertical-align: middle;
     margin-right: 5px;
+  }
+}
+
+@media screen and (max-width: $medium-screen) {
+  .recipe-details {
+    p {
+      width: 40%;
+    }
   }
 }
 
