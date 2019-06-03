@@ -60,6 +60,19 @@
   }
 }
 
+.recipe-body {
+  display: flex;
+  padding: 20px 0px;
+
+  .recipe-sidebar {
+    flex: 30%;
+  }
+
+  .recipe-directions {
+    flex: 70%;
+  }
+}
+
 @media screen and (max-width: $medium-screen) {
   .recipe-details {
     p {

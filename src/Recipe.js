@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 class Recipe extends Component {
   constructor(props) {
@@ -104,6 +104,17 @@ class Recipe extends Component {
         </div>
         {this.renderHeader()}
         <div className="recipe-body">
+          <div className="recipe-sidebar">
+            <h3>Ingredients</h3>
+            {documentToReactComponents(this.props.recipe.ingredients)}
+            <br/>
+            <h3>Cookware</h3>
+            {documentToReactComponents(this.props.recipe.cookware)}
+          </div>
+          <div className="recipe-directions">
+            <h3>Directions</h3>
+            {documentToReactComponents(this.props.recipe.directions)}
+          </div>
         </div>
       </div>
     )

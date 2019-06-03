@@ -10,7 +10,6 @@ const FAQ = (props) => {
         <p>{props.data.subtitle}</p>
       </div>
       {documentToReactComponents(props.data.text)}
-      {/* <pre>{JSON.stringify(props.data, null, 2)}</pre> */}
     </div>
     
   );
