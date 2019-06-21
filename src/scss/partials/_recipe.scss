@@ -60,17 +60,16 @@
   }
 }
 
-.recipe-body {
-  display: flex;
-  padding: 20px 0px;
+.recipe-sidebar {
+  width: 30%;
+  padding: 15px;
+  box-sizing: border-box;
+}
 
-  .recipe-sidebar {
-    flex: 30%;
-  }
-
-  .recipe-directions {
-    flex: 70%;
-  }
+.recipe-directions {
+  width: 70%;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: $medium-screen) {
@@ -118,5 +117,13 @@
       width: inherit;
       flex-grow: 1;
     }
+  }
+
+  .recipe-sidebar {
+    width: 100%;
+  }
+
+  .recipe-directions {
+    width: 100%;
   }
 }

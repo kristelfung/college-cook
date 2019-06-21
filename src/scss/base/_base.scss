@@ -15,7 +15,6 @@ body {
   flex-wrap: wrap;
   margin: -15px;
   padding: 20px 0px;
-  align-items: center;
 }
 
 .column {
@@ -65,4 +64,12 @@ p {
 
 .emoji {
   font-size: 20px;
+}
+
+ul {
+  padding-left: 18px;
+}
+
+ol {
+  padding-left: 15px;
 }

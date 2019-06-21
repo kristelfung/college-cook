@@ -103,16 +103,16 @@ class Recipe extends Component {
           <Link to="/" className="button button--secondary">Back</Link>
         </div>
         {this.renderHeader()}
-        <div className="recipe-body">
+        <div className="row">
           <div className="recipe-sidebar">
-            <h3>Ingredients</h3>
+            <h2>Ingredients</h2>
             {documentToReactComponents(this.props.recipe.ingredients)}
             <br/>
-            <h3>Cookware</h3>
+            <h2>Cookware</h2>
             {documentToReactComponents(this.props.recipe.cookware)}
           </div>
           <div className="recipe-directions">
-            <h3>Directions</h3>
+            <h2>Directions</h2>
             {documentToReactComponents(this.props.recipe.directions)}
           </div>
         </div>
