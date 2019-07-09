@@ -1,7 +1,16 @@
 body {
   font-family: jaf-domus, sans-serif;
   margin: 0;
-  padding-bottom: 50px;
+}
+
+.body-wrap {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
 }
 
 .container {
