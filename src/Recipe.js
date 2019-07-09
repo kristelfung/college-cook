@@ -31,7 +31,7 @@ class Recipe extends Component {
           <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
-              <button className="like">15</button>
+              {/* <button className="like">15</button> */}
           </div>
           <div className="recipe-details">
               <p>
@@ -68,7 +68,7 @@ class Recipe extends Component {
             <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
-              <button className="like">15</button>
+              {/* <button className="like">15</button> */}
             </div>
             <div className="recipe-details">
               <p>
