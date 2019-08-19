@@ -70,7 +70,7 @@ class CollegeCook extends Component {
             {this.state.recipes.map(({fields}, i) =>
               <Route path={"/" + this.urlify(fields.name) + "/"} 
                 component={() => (<Recipe recipe={fields}/>)}
-                key={i}/>
+                key={this.urlify(fields.name)}/>
             )}
           </Router>
         </div>

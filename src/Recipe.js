@@ -10,10 +10,10 @@ class Recipe extends Component {
     }
   }
   componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
+    window.addEventListener('resize', this.handleResize);
   }
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener('resize', this.handleResize);
   }
   handleResize = () => {
       this.setState({windowSize: window.innerWidth})
@@ -22,7 +22,7 @@ class Recipe extends Component {
   renderHeader = () => {
     if (this.state.windowSize < 800) {
       return [
-        <div className="row">
+        <div className="row" key="mobile">
           <div className="recipe-img-wrap">
             <div className="recipe-image" 
                 style={{backgroundImage: "url(" + this.props.recipe.image.fields.file.url + ")"}}>
@@ -31,7 +31,7 @@ class Recipe extends Component {
           <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
-              {/* <button className="like">15</button> */}
+              <button className="like">15</button>
           </div>
           <div className="recipe-details">
               <p>
@@ -58,7 +58,7 @@ class Recipe extends Component {
     }
     else {
       return [
-        <div className="row">
+        <div className="row" key="desktop">
           <div className="recipe-img-wrap">
             <div className="recipe-image" 
                 style={{backgroundImage: "url(" + this.props.recipe.image.fields.file.url + ")"}}>
@@ -68,7 +68,7 @@ class Recipe extends Component {
             <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
-              {/* <button className="like">15</button> */}
+              <button className="like">15</button>
             </div>
             <div className="recipe-details">
               <p>

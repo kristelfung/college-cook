@@ -5,7 +5,7 @@ const Submit = () => {
     <div className="container">
       <div className="banner">
         <h1>Submit</h1>
-        <p>Send in a cheap, healthy, and convenient recipe.</p>
+        <p>Send in a recipe which may or may not be published!</p>
       </div>
     </div>
   )
