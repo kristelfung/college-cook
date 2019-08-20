@@ -60,7 +60,7 @@ class Recipe extends Component {
   renderHeader = () => {
     if (this.state.windowSize < 800) {
       return [
-        <div className="row" key="mobile">
+        <div className="row row--recipe-header-mobile" key="mobile">
           <div className="recipe-img-wrap">
             <div className="recipe-image" 
                 style={{backgroundImage: "url(" + this.props.recipe.image.fields.file.url + ")"}}>

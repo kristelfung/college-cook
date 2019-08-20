@@ -93,6 +93,10 @@
 }
 
 @media screen and (max-width: $small-screen) {
+  .row--recipe-header-mobile {
+    align-items: center;
+  }
+
   .recipe-title {
     display: block;
   }

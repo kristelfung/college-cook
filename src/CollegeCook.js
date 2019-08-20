@@ -5,12 +5,17 @@ import Home from './Home';
 import FAQ from './FAQ';
 import Submit from './Submit';
 import Recipe from './Recipe';
+import Firebase from 'firebase';
+import config from './config';
 import logo from './images/logo.svg';
 import "./scss/styles.scss";
 
 class CollegeCook extends Component {
   constructor(props) {
     super(props);
+    console.log(config.firebase)
+    //Firebase.initializeApp(config.firebase)
+
     this.state = {
       recipes: [],
       faq: {},
@@ -22,17 +27,34 @@ class CollegeCook extends Component {
     space: process.env.REACT_APP_SPACE_ID,
     accessToken: process.env.REACT_APP_ACCESS_TOKEN
   })
+
   componentDidMount() {
     this.setState({ loading: true })
-    this.fetchPosts().then(this.setPosts);
+    this.fetchPosts().then(this.setPosts)
+    //this.getLikes()
+    this.setState({ loading: false })
   }
+
   fetchPosts = () => this.client.getEntries()
-  setPosts = response => {
+
+  setPosts = (response) => {
     this.setState({
       recipes: response.items.filter(item => item.sys.contentType.sys.id === "recipe"),
-      faq: response.items.find(item => item.sys.contentType.sys.id === "faq"),
-      loading: false
+      faq: response.items.find(item => item.sys.contentType.sys.id === "faq")
     })
+  }
+
+  getLikes = () => {
+    let ref = Firebase.database().ref('/')
+    console.log(ref)
+  }
+
+  addLike = () => {
+
+  }
+
+  removeLike = () => {
+
   }
   
   urlify = (name) => {
