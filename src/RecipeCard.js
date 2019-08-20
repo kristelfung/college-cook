@@ -20,15 +20,16 @@ class RecipeCard extends Component {
 
   handleClickLike = (e) => {
     e.preventDefault();
-    if (this.state.color === '#ffffff') {
-      this.setState(() => ({color: '#ff9e88'}))
-      localStorage.setItem(this.props.urlify(this.props.recipe.name), 1)
-      // ADD 1 TO STATE
-      // SEND UPDATE TO FIREBASE
-    } else {
+    const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
+    if (like === '1') {
       this.setState(() => ({color: '#ffffff'}))
       localStorage.setItem(this.props.urlify(this.props.recipe.name), 0)
       // DEDUCT 1 FROM STATE
+      // SEND UPDATE TO FIREBASE
+    } else {
+      this.setState(() => ({color: '#ff9e88'}))
+      localStorage.setItem(this.props.urlify(this.props.recipe.name), 1)
+      // ADD 1 TO STATE
       // SEND UPDATE TO FIREBASE
     }
   }

@@ -36,21 +36,23 @@ class Recipe extends Component {
   }
 
   handleClickLike = () => {
-    if (this.state.buttonText === '#000000') {
-      this.setState(() => ({
-        buttonBackground: '#fd4c4c',
-        buttonText: '#ffffff'
-      }))
-      localStorage.setItem(this.props.urlify(this.props.recipe.name), 1)
-      // ADD 1 TO STATE
-      // SEND UPDATE TO FIREBASE
-    } else {
+    const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
+    if (like === '1') {
       this.setState(() => ({
         buttonBackground: '#efefef',
         buttonText: '#000000'
       }))
       localStorage.setItem(this.props.urlify(this.props.recipe.name), 0)
       // DEDUCT 1 FROM STATE
+      // SEND UPDATE TO FIREBASE
+    } 
+    else {
+      this.setState(() => ({
+        buttonBackground: '#fd4c4c',
+        buttonText: '#ffffff'
+      }))
+      localStorage.setItem(this.props.urlify(this.props.recipe.name), 1)
+      // ADD 1 TO STATE
       // SEND UPDATE TO FIREBASE
     }
   }
