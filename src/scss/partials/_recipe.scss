@@ -44,6 +44,12 @@
   }
 }
 
+.recipe-like {
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .recipe-details {
   display: flex;
   padding: 0px 15px;
@@ -58,6 +64,12 @@
     vertical-align: middle;
     margin-right: 5px;
   }
+}
+
+.recipe-like-num {
+  font-weight: bold;
+  font-size: 18px;
+  vertical-align: middle;
 }
 
 .recipe-sidebar {
@@ -104,7 +116,7 @@
       margin-top: 0px;
     }
 
-    .like {
+    .recipe-like {
       margin: 8px 0px;
     }
   }

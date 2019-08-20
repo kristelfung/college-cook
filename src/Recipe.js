@@ -6,17 +6,53 @@ class Recipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      windowSize: window.innerWidth
+      windowSize: window.innerWidth,
+      buttonBackground: '#efefef',
+      buttonText: '#000000'
     }
   }
+
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
+    // check if its liked or not
+    try {
+      const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
+      if (like === '1') {
+        this.setState(() => ({
+          buttonBackground: '#fd4c4c', 
+          buttonText: '#ffffff'
+        }))
+      }
+    } 
+    catch (e) {}
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
+
   handleResize = () => {
-      this.setState({windowSize: window.innerWidth})
+    this.setState({windowSize: window.innerWidth})
+  }
+
+  handleClickLike = () => {
+    if (this.state.buttonText === '#000000') {
+      this.setState(() => ({
+        buttonBackground: '#fd4c4c',
+        buttonText: '#ffffff'
+      }))
+      localStorage.setItem(this.props.urlify(this.props.recipe.name), 1)
+      // ADD 1 TO STATE
+      // SEND UPDATE TO FIREBASE
+    } else {
+      this.setState(() => ({
+        buttonBackground: '#efefef',
+        buttonText: '#000000'
+      }))
+      localStorage.setItem(this.props.urlify(this.props.recipe.name), 0)
+      // DEDUCT 1 FROM STATE
+      // SEND UPDATE TO FIREBASE
+    }
   }
 
   renderHeader = () => {
@@ -31,7 +67,13 @@ class Recipe extends Component {
           <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
-              <button className="like">15</button>
+              <button 
+                className="like" 
+                style={{backgroundColor: this.state.buttonBackground}}
+                onClick={this.handleClickLike}
+              >
+                15
+              </button>
           </div>
           <div className="recipe-details">
               <p>
@@ -68,7 +110,14 @@ class Recipe extends Component {
             <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
-              <button className="like">15</button>
+              <button 
+                className="recipe-like" 
+                style={{backgroundColor: this.state.buttonBackground}}
+                onClick={this.handleClickLike}
+              >
+                <span className="emoji" role="img">👍</span>
+                <span className="recipe-like-num" style={{color: this.state.buttonText}}>15</span>
+              </button>
             </div>
             <div className="recipe-details">
               <p>

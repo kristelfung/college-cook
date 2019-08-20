@@ -64,12 +64,12 @@ class CollegeCook extends Component {
                 </div>
               </div>
             </nav>
-            <Route exact path="/" component={() => (<Home recipes={this.state.recipes} />)}/>
+            <Route exact path="/" component={() => (<Home recipes={this.state.recipes} urlify={this.urlify} />)}/>
             <Route path="/faq/" component={() => (<FAQ data={this.state.faq.fields} />)}/>
             <Route path="/submit/" component={Submit}/>
             {this.state.recipes.map(({fields}, i) =>
               <Route path={"/" + this.urlify(fields.name) + "/"} 
-                component={() => (<Recipe recipe={fields}/>)}
+                component={() => (<Recipe recipe={fields} urlify={this.urlify} />)}
                 key={this.urlify(fields.name)}/>
             )}
           </Router>
