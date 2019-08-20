@@ -74,7 +74,7 @@ class Recipe extends Component {
                 style={{backgroundColor: this.state.buttonBackground}}
                 onClick={this.handleClickLike}
               >
-                <span className="emoji" role="img">👍</span>
+                <span className="emoji" role="img" aria-label="thumbs-up">👍</span>
                 <span className="recipe-like-num" style={{color: this.state.buttonText}}>15</span>
               </button>
           </div>
@@ -118,7 +118,7 @@ class Recipe extends Component {
                 style={{backgroundColor: this.state.buttonBackground}}
                 onClick={this.handleClickLike}
               >
-                <span className="emoji" role="img">👍</span>
+                <span className="emoji" role="img" aria-label="thumbs-up">👍</span>
                 <span className="recipe-like-num" style={{color: this.state.buttonText}}>15</span>
               </button>
             </div>
