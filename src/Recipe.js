@@ -68,11 +68,12 @@ class Recipe extends Component {
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
               <button 
-                className="like" 
+                className="recipe-like" 
                 style={{backgroundColor: this.state.buttonBackground}}
                 onClick={this.handleClickLike}
               >
-                15
+                <span className="emoji" role="img">👍</span>
+                <span className="recipe-like-num" style={{color: this.state.buttonText}}>15</span>
               </button>
           </div>
           <div className="recipe-details">

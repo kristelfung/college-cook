@@ -1,3 +1,11 @@
+.recipe-img-wrap {
+  width: 20%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
 .recipe-image {
   background-position: center center;
   background-size: cover;
@@ -9,14 +17,6 @@
   display: block;
   padding-bottom: 100%;
 }
-
-.recipe-img-wrap {
-  width: 20%;
-  flex-grow: 0;
-  flex-shrink: 0;
-  padding: 15px;
-  box-sizing: border-box;
-} 
 
 .recipe-header {
   width: 80%;
@@ -98,12 +98,12 @@
   }
 
   .recipe-img-wrap {
-    width: 30%;
+    width: 40%;
   }
 
   .recipe-title {
-    width: 70%;
-    padding: 15px;
+    width: 60%;
+    padding: 10px 0px;
     box-sizing: border-box;
     margin-bottom: 0px;
 
