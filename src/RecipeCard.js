@@ -22,7 +22,8 @@ class RecipeCard extends Component {
     return name.replace(/\s+/g, '-').toLowerCase();
   }
 
-  handleClickLike = () => {
+  handleClickLike = (e) => {
+    e.preventDefault();
     if (this.state.color === '#ffffff') {
       this.setState(() => ({color: '#ff9e88'}))
       localStorage.setItem(this.urlify(this.props.recipe.name), 1)
@@ -46,13 +47,10 @@ class RecipeCard extends Component {
             <span className="time">{this.props.recipe.time} mins</span>
             <span className="cost">${this.props.recipe.cost}</span>
             <h2>{this.props.recipe.name}</h2>
-            <div className="like-button" onClick={this.handleClickLike}>
-              <span role="img" 
-                aria-label="thumbs-up" 
-                className="emoji emoji--thumb"
-              >👍</span>
+            <a href="" className="like-button" onClick={this.handleClickLike}>
+              <span role="img" aria-label="thumbs-up" className="emoji">👍</span>
               <span className="likes" style={{color: this.state.color}}>15</span>
-            </div>
+            </a>
           </div>
         </a>
       </div>
