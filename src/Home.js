@@ -11,7 +11,10 @@ const Home = (props) => {
         </div>
         <div className="row">
           {props.recipes.map(({fields}, i) => 
-            <RecipeCard recipe={fields} key={i} urlify={props.urlify}>
+            <RecipeCard recipe={fields} 
+              key={props.urlify(fields.name)} 
+              urlify={props.urlify}
+              changeLike={props.changeLike}>
             </RecipeCard>
           )}
         </div>

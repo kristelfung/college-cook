@@ -8,30 +8,32 @@ class RecipeCard extends Component {
     }
   }
 
-  componentDidMount () {
-    try {
-      const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
-      if (like === '1') {
-        this.setState(() => ({color: '#ff9e88'}))
-      }
-    } 
-    catch (e) {}
-  }
+  // componentDidMount () {
+    // try {
+    //   const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
+    //   if (like === '1') {
+    //     this.setState(() => ({color: '#ff9e88'}))
+    //   }
+    // } 
+    // catch (e) {}
+  // }
 
-  handleClickLike = (e) => {
-    e.preventDefault();
-    const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
-    if (like === '1') {
-      this.setState(() => ({color: '#ffffff'}))
-      localStorage.setItem(this.props.urlify(this.props.recipe.name), 0)
-      // DEDUCT 1 FROM STATE
-      // SEND UPDATE TO FIREBASE
-    } else {
-      this.setState(() => ({color: '#ff9e88'}))
-      localStorage.setItem(this.props.urlify(this.props.recipe.name), 1)
-      // ADD 1 TO STATE
-      // SEND UPDATE TO FIREBASE
-    }
+  handleClickLike = (e) => { 
+    e.preventDefault()
+    this.props.changeLike()
+    // const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
+    // if (like === '1') {
+    //   this.setState(() => ({color: '#ffffff'}))
+    //   localStorage.setItem(this.props.urlify(this.props.recipe.name), 0)
+    //   // DEDUCT 1 FROM STATE + UPDATE FIREBASE
+    //   this.props.decrementLikes(this.props.recipe.name)
+    // } 
+    // else if (like === '0') {
+    //   this.setState(() => ({color: '#ff9e88'}))
+    //   localStorage.setItem(this.props.urlify(this.props.recipe.name), 1)
+    //   // ADD 1 TO STATE + UPDATE FIREBASE
+    //   this.props.incrementLikes(this.props.recipe.name)
+    // }
   }
 
   render() {
@@ -46,7 +48,7 @@ class RecipeCard extends Component {
             <h2>{this.props.recipe.name}</h2>
             <button className="recipe-card__like" onClick={this.handleClickLike}>
               <span role="img" aria-label="thumbs-up" className="emoji">👍</span>
-              <span style={{color: this.state.color}}>15</span>
+              <span style={{color: this.state.color}}>{this.props.recipe.likes || 0}</span>
             </button>
           </div>
         </a>

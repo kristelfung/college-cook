@@ -13,8 +13,7 @@ import "./scss/styles.scss";
 class CollegeCook extends Component {
   constructor(props) {
     super(props);
-    console.log(config.firebase)
-    //Firebase.initializeApp(config.firebase)
+    Firebase.initializeApp(config)
 
     this.state = {
       recipes: [],
@@ -31,7 +30,8 @@ class CollegeCook extends Component {
   componentDidMount() {
     this.setState({ loading: true })
     this.fetchPosts().then(this.setPosts)
-    //this.getLikes()
+    this.startSession()  // create instance of user session w/ their likes!
+    this.getLikes()  // get total likes
     this.setState({ loading: false })
   }
 
@@ -46,16 +46,62 @@ class CollegeCook extends Component {
 
   getLikes = () => {
     let ref = Firebase.database().ref('/')
-    console.log(ref)
+    ref.on('value', snapshot => {
+      const likesDictionary = snapshot.val() // this is a dictionary
+      for (let i = 0; i < this.state.recipes.length; i++) {
+        const recipeName = this.urlify(this.state.recipes[i].fields.name)
+        if (likesDictionary[recipeName]) { // if recipe found in firebase likes dict
+          this.setState(() =>
+            this.state.recipes[i].fields['likes'] = (likesDictionary[recipeName])
+          )
+        }
+      }
+    })
   }
 
-  addLike = () => {
-
+  startSession = () => {
+    // start the session
+    Firebase.auth().signInAnonymously().catch((err) => {
+      console.log(err.name + err.message)
+    })
+    Firebase.auth().onAuthStateChanged(user => {
+      Firebase.database().ref('users/' + user.uid).once('value', snapshot => {
+        if (snapshot.exists()) {
+          console.log("create user")
+        }
+        else { // fetch user's likes
+          console.log("logged in user")
+        }
+      })
+    })
   }
 
-  removeLike = () => {
-
+  updateSession = (id) => {
+    // get current user likes and store in state (rerender occurs on state change)
   }
+
+  changeLike = (name) => {
+    // modify current session
+    // Firebase.auth().onAuthStateChanged((user) => {
+    //   Firebase.database().ref('users/' + user.uid).once('value', snapshot => {
+    //     let likes = snapshot.child('likes').val()
+    //     console.log(likes)
+    //   })
+    // })
+    // decide whether to + or - to total likes
+    // let ref = Firebase.database().ref('/' + this.urlify(name))
+    // ref.transaction((current_value) => {
+    //   return (current_value || 0) + 1
+    // })
+  }
+
+  // decrementLikes = (name) => {
+  //   // then decrement to firebase
+  //   let ref = Firebase.database().ref('/' + this.urlify(name))
+  //   ref.transaction((current_value) => {
+  //     return (current_value || 0) - 1
+  //   })
+  // }
   
   urlify = (name) => {
     return name.replace(/\s+/g, '-').toLowerCase();
@@ -86,13 +132,23 @@ class CollegeCook extends Component {
                 </div>
               </div>
             </nav>
-            <Route exact path="/" component={() => (<Home recipes={this.state.recipes} urlify={this.urlify} />)}/>
+            <Route exact path="/" component={() => (
+              <Home recipes={this.state.recipes} 
+                urlify={this.urlify}
+                changeLike={this.changeLike}
+              />
+            )}/>
             <Route path="/faq/" component={() => (<FAQ data={this.state.faq.fields} />)}/>
             <Route path="/submit/" component={Submit}/>
             {this.state.recipes.map(({fields}, i) =>
-              <Route path={"/" + this.urlify(fields.name) + "/"} 
-                component={() => (<Recipe recipe={fields} urlify={this.urlify} />)}
-                key={this.urlify(fields.name)}/>
+              <Route path={"/" + this.urlify(fields.name) + "/"}
+                key={this.urlify(fields.name)}
+                component={() => (
+                <Recipe recipe={fields} 
+                  urlify={this.urlify} 
+                  changeLike={this.changeLike}
+                />)}
+              />
             )}
           </Router>
         </div>
