@@ -36,7 +36,7 @@ class Recipe extends Component {
   }
 
   handleClickLike = () => {
-    this.props.changeLike()
+    this.props.changeLike(this.props.urlify(this.props.recipe.name))
     // const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
     // if (like === '1') {
     //   this.setState(() => ({

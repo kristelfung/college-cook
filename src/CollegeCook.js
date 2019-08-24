@@ -31,7 +31,7 @@ class CollegeCook extends Component {
     this.setState({ loading: true })
     this.fetchPosts().then(this.setPosts)
     this.startSession()  // create instance of user session w/ their likes!
-    this.getLikes()  // get total likes
+    this.getTotalLikes()  // get total likes
     this.setState({ loading: false })
   }
 
@@ -44,8 +44,8 @@ class CollegeCook extends Component {
     })
   }
 
-  getLikes = () => {
-    let ref = Firebase.database().ref('/')
+  getTotalLikes = () => {
+    const ref = Firebase.database().ref('/')
     ref.on('value', snapshot => {
       const likesDictionary = snapshot.val() // this is a dictionary
       for (let i = 0; i < this.state.recipes.length; i++) {
@@ -66,42 +66,60 @@ class CollegeCook extends Component {
     })
     Firebase.auth().onAuthStateChanged(user => {
       Firebase.database().ref('users/' + user.uid).once('value', snapshot => {
-        if (snapshot.exists()) {
-          console.log("create user")
+        // if (!snapshot.exists()) {
+        //   console.log("create user")
+        // }
+        // this.getUserLikes(user.uid) 
+      })
+    })
+  }
+
+  // getUserLikes = (uid) => {
+  //   // get current user likes and store in state (rerender occurs on state change)
+  //   const ref = Firebase.database().ref('users/' + uid)
+  //   ref.on('value', snapshot => {
+  //     const liked = snapshot.val()
+  //     // NEED TO GET USER LIKES. FIRST DO CHANGELIKE TO ADD LIKES
+  //   })
+  // }
+
+  changeLike = (recipeName) => {
+    // modify current session
+    Firebase.auth().onAuthStateChanged((user) => {
+      const ref = Firebase.database().ref('users/' + user.uid)
+      ref.once('value').then(snapshot => {
+        if (snapshot.exists()) { // if user has likes already!
+          for (const [key, value] of Object.entries(snapshot.val())) {
+            if (recipeName === value) {
+              ref.child(key).remove()
+              this.decrementTotalLikes(recipeName)
+              return
+            }
+          }
+          ref.push(recipeName) // if not found in user likes, push.
+          this.incrementTotalLikes(recipeName)
         }
-        else { // fetch user's likes
-          console.log("logged in user")
+        else { // create this user in the db (first like!)
+          ref.push(recipeName)
+          this.incrementTotalLikes(recipeName)
         }
       })
     })
   }
 
-  updateSession = (id) => {
-    // get current user likes and store in state (rerender occurs on state change)
+  decrementTotalLikes = (recipeName) => {
+    let ref = Firebase.database().ref('/' + recipeName)
+    ref.transaction((current_value) => {
+      return (current_value || 0) - 1
+    })
   }
 
-  changeLike = (name) => {
-    // modify current session
-    // Firebase.auth().onAuthStateChanged((user) => {
-    //   Firebase.database().ref('users/' + user.uid).once('value', snapshot => {
-    //     let likes = snapshot.child('likes').val()
-    //     console.log(likes)
-    //   })
-    // })
-    // decide whether to + or - to total likes
-    // let ref = Firebase.database().ref('/' + this.urlify(name))
-    // ref.transaction((current_value) => {
-    //   return (current_value || 0) + 1
-    // })
+  incrementTotalLikes = (recipeName) => {
+    let ref = Firebase.database().ref('/' + recipeName)
+    ref.transaction((current_value) => {
+      return (current_value || 0) + 1
+    })
   }
-
-  // decrementLikes = (name) => {
-  //   // then decrement to firebase
-  //   let ref = Firebase.database().ref('/' + this.urlify(name))
-  //   ref.transaction((current_value) => {
-  //     return (current_value || 0) - 1
-  //   })
-  // }
   
   urlify = (name) => {
     return name.replace(/\s+/g, '-').toLowerCase();
