@@ -172,6 +172,7 @@ class CollegeCook extends Component {
             </nav>
             <Route exact path="/" component={() => (
               <Home recipes={this.state.recipes} 
+                userlikes={this.state.userlikes}
                 urlify={this.urlify}
                 changeLike={this.changeLike}
               />
@@ -185,6 +186,7 @@ class CollegeCook extends Component {
                 <Recipe recipe={fields} 
                   urlify={this.urlify} 
                   changeLike={this.changeLike}
+                  liked={this.urlify(fields.name) in this.state.userlikes}
                 />)}
               />
             )}

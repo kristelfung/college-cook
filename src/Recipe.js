@@ -6,25 +6,12 @@ class Recipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      windowSize: window.innerWidth,
-      buttonBackground: '#efefef',
-      buttonText: '#000000'
+      windowSize: window.innerWidth
     }
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
-    // check if its liked or not
-    try {
-      const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
-      if (like === '1') {
-        this.setState(() => ({
-          buttonBackground: '#fd4c4c', 
-          buttonText: '#ffffff'
-        }))
-      }
-    } 
-    catch (e) {}
   }
 
   componentWillUnmount() {
@@ -37,25 +24,6 @@ class Recipe extends Component {
 
   handleClickLike = () => {
     this.props.changeLike(this.props.urlify(this.props.recipe.name))
-    // const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
-    // if (like === '1') {
-    //   this.setState(() => ({
-    //     buttonBackground: '#efefef',
-    //     buttonText: '#000000'
-    //   }))
-    //   localStorage.setItem(this.props.urlify(this.props.recipe.name), 0)
-    //   // DEDUCT 1 FROM STATE + UPDATE FIREBASE
-    //   this.props.decrementLikes(this.props.recipe.name)
-    // } 
-    // else if (like === '0') {
-    //   this.setState(() => ({
-    //     buttonBackground: '#fd4c4c',
-    //     buttonText: '#ffffff'
-    //   }))
-    //   localStorage.setItem(this.props.urlify(this.props.recipe.name), 1)
-    //   // ADD 1 TO STATE + UPDATE FIREBASE
-    //   this.props.incrementLikes(this.props.recipe.name)
-    // }
   }
 
   renderHeader = () => {
@@ -72,11 +40,15 @@ class Recipe extends Component {
               <p>by {this.props.recipe.author}</p>
               <button 
                 className="recipe-like" 
-                style={{backgroundColor: this.state.buttonBackground}}
+                style={
+                  this.props.liked ? {backgroundColor: "#fd4c4c"} : {backgroundColor: "#efefef"}
+                }
                 onClick={this.handleClickLike}
               >
                 <span className="emoji" role="img" aria-label="thumbs-up">👍</span>
-                <span className="recipe-like-num" style={{color: this.state.buttonText}}>
+                <span className="recipe-like-num" style={
+                  this.props.liked ? {color: "#ffffff"} : {color: "#000000"}
+                }>
                   {this.props.recipe.likes || 0}
                 </span>
               </button>
@@ -118,11 +90,15 @@ class Recipe extends Component {
               <p>by {this.props.recipe.author}</p>
               <button 
                 className="recipe-like" 
-                style={{backgroundColor: this.state.buttonBackground}}
+                style={
+                  this.props.liked ? {backgroundColor: "#fd4c4c"} : {backgroundColor: "#efefef"}
+                }
                 onClick={this.handleClickLike}
               >
                 <span className="emoji" role="img" aria-label="thumbs-up">👍</span>
-                <span className="recipe-like-num" style={{color: this.state.buttonText}}>
+                <span className="recipe-like-num" style={
+                  this.props.liked ? {color: "#ffffff"} : {color: "#000000"}
+                }>
                   {this.props.recipe.likes || 0}
                 </span>
               </button>

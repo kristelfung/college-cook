@@ -14,7 +14,8 @@ const Home = (props) => {
             <RecipeCard recipe={fields} 
               key={props.urlify(fields.name)} 
               urlify={props.urlify}
-              changeLike={props.changeLike}>
+              changeLike={props.changeLike}
+              liked={props.urlify(fields.name) in props.userlikes}>
             </RecipeCard>
           )}
         </div>
