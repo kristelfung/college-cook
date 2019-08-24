@@ -96,13 +96,10 @@ class CollegeCook extends Component {
               return
             }
           }
-          ref.push(recipeName) // if not found in user likes, push.
-          this.incrementTotalLikes(recipeName)
         }
-        else { // create this user in the db (first like!)
-          ref.push(recipeName)
-          this.incrementTotalLikes(recipeName)
-        }
+        // if not found in user likes, push!
+        ref.push(recipeName)
+        this.incrementTotalLikes(recipeName)
       })
     })
   }
