@@ -6,14 +6,17 @@ import FAQ from './FAQ';
 import Submit from './Submit';
 import Recipe from './Recipe';
 import Firebase from 'firebase';
-import config from './config';
 import logo from './images/logo.svg';
 import "./scss/styles.scss";
 
 class CollegeCook extends Component {
   constructor(props) {
     super(props);
-    Firebase.initializeApp(config)
+    Firebase.initializeApp({
+      apiKey: process.env.REACT_APP_API_KEY,
+      authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+      databaseURL: process.env.REACT_APP_DATABASE_URL
+    })
 
     this.state = {
       recipes: [],
