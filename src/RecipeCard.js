@@ -8,16 +8,6 @@ class RecipeCard extends Component {
     }
   }
 
-  // componentDidMount () {
-    // try {
-    //   const like = localStorage.getItem(this.props.urlify(this.props.recipe.name))
-    //   if (like === '1') {
-    //     this.setState(() => ({color: '#ff9e88'}))
-    //   }
-    // } 
-    // catch (e) {}
-  // }
-
   handleClickLike = (e) => { 
     e.preventDefault()
     this.props.changeLike(this.props.urlify(this.props.recipe.name))

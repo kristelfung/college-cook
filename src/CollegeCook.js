@@ -18,6 +18,7 @@ class CollegeCook extends Component {
     this.state = {
       recipes: [],
       faq: {},
+      userlikes: {},
       loading: true
     }
   }
@@ -71,21 +72,27 @@ class CollegeCook extends Component {
     })
     Firebase.auth().onAuthStateChanged(user => {
       Firebase.database().ref('users/' + user.uid).once('value', snapshot => {
-        // if (!snapshot.exists()) {
-        //   this.getUserLikes(user.uid) 
-        // }
+        if (snapshot.exists()) {
+          this.getUserLikes(user.uid) 
+        }
       })
     })
   }
 
-  // getUserLikes = (uid) => {
-  //   // get current user likes and store in state (rerender occurs on state change)
-  //   const ref = Firebase.database().ref('users/' + uid)
-  //   ref.on('value', snapshot => {
-  //     const liked = snapshot.val()
-  //     // NEED TO GET USER LIKES. FIRST DO CHANGELIKE TO ADD LIKES
-  //   })
-  // }
+  getUserLikes = (uid) => {
+    // get current user likes and store in state (rerender occurs on state change)
+    const ref = Firebase.database().ref('users/' + uid)
+    const likesDict = {}
+    ref.on('value', snapshot => {
+      const snapshotDict = snapshot.val()
+      for (const key in snapshotDict) {
+        likesDict[snapshotDict[key]] = 1
+      }
+    })
+    this.setState({
+      userlikes: likesDict
+    })
+  }
 
   changeLike = (recipeName) => {
     // modify current session
@@ -97,6 +104,12 @@ class CollegeCook extends Component {
             if (recipeName === value) {
               ref.child(key).remove()
               this.decrementTotalLikes(recipeName)
+              // change state
+              const newLikes = this.state.userlikes
+              delete newLikes[recipeName]
+              this.setState({
+                userlikes: newLikes
+              })
               return
             }
           }
@@ -104,6 +117,12 @@ class CollegeCook extends Component {
         // if not found in user likes, push!
         ref.push(recipeName)
         this.incrementTotalLikes(recipeName)
+        // change state
+        const newLikes = this.state.userlikes
+        newLikes[recipeName] = 1
+        this.setState({
+          userlikes: newLikes
+        })
       })
     })
   }
