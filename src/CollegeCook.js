@@ -47,15 +47,20 @@ class CollegeCook extends Component {
   getTotalLikes = () => {
     const ref = Firebase.database().ref('/')
     ref.on('value', snapshot => {
-      const likesDictionary = snapshot.val() // this is a dictionary
+      const likesDictionary = snapshot.val() // dict - [recipeName]: num of likes
+      const newRecipes = this.state.recipes
       for (let i = 0; i < this.state.recipes.length; i++) {
         const recipeName = this.urlify(this.state.recipes[i].fields.name)
-        if (likesDictionary[recipeName]) { // if recipe found in firebase likes dict
-          this.setState(() =>
-            this.state.recipes[i].fields['likes'] = (likesDictionary[recipeName])
-          )
+        if (likesDictionary[recipeName]) { // if recipe has likes
+          newRecipes[i].fields['likes'] = likesDictionary[recipeName]
+        } 
+        else { // recipe has no likes
+          newRecipes[i].fields['likes'] = 0
         }
       }
+      this.setState({
+        recipes: newRecipes
+      })
     })
   }
 
@@ -67,9 +72,8 @@ class CollegeCook extends Component {
     Firebase.auth().onAuthStateChanged(user => {
       Firebase.database().ref('users/' + user.uid).once('value', snapshot => {
         // if (!snapshot.exists()) {
-        //   console.log("create user")
+        //   this.getUserLikes(user.uid) 
         // }
-        // this.getUserLikes(user.uid) 
       })
     })
   }
