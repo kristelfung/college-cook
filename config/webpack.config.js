@@ -470,7 +470,9 @@ module.exports = function(webpackEnv) {
     },
     plugins: [
       // Include dot.env as a plugin
-      new Dotenv(),
+      new Dotenv({
+        systemvars: true
+      }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
