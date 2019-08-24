@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class RecipeCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClickLike = (e) => { 
     e.preventDefault()
     this.props.changeLike(this.props.urlify(this.props.recipe.name))
