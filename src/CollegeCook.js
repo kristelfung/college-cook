@@ -196,10 +196,10 @@ class CollegeCook extends Component {
             <nav className="navbar">
               <div className="container">
                 <div className="navbar__left">
-                  <a href="/" className="link-wrapper logo">
+                  <Link to="/" className="link-wrapper logo">
                     <img src={logo} className="logo__image" alt="logo"/>
                     <span className="logo__text">collegecook</span>
-                  </a>
+                  </Link>
                 </div>
                 <div className="navbar__right">
                   <Link to="/" className="navbar__item">Home</Link>
