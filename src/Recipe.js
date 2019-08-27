@@ -49,7 +49,7 @@ class Recipe extends Component {
                 <span className="recipe-like-num" style={
                   this.props.liked ? {color: "#ffffff"} : {color: "#000000"}
                 }>
-                  {this.props.recipe.likes || 0}
+                  {this.props.totallikes || 0}
                 </span>
               </button>
           </div>
@@ -99,7 +99,7 @@ class Recipe extends Component {
                 <span className="recipe-like-num" style={
                   this.props.liked ? {color: "#ffffff"} : {color: "#000000"}
                 }>
-                  {this.props.recipe.likes || 0}
+                  {this.props.totallikes || 0}
                 </span>
               </button>
             </div>

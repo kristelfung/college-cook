@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class RecipeCard extends Component {
   handleClickLike = (e) => { 
@@ -9,7 +10,7 @@ class RecipeCard extends Component {
   render() {
     return (
       <div className="column">
-        <a href={this.props.urlify(this.props.recipe.name)} className="link-wrapper">
+        <Link to={this.props.urlify(this.props.recipe.name)} className="link-wrapper">
           <div className="recipe-card" 
             style={{backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(" + this.props.recipe.image.fields.file.url + ")"}}>
             <span role="img" aria-label="clock" className="emoji emoji--clock">⏰</span>
@@ -21,11 +22,11 @@ class RecipeCard extends Component {
               <span style={
                 this.props.liked ? {color: '#ff9e88'} : {color: '#ffffff'}
               }>
-                {this.props.recipe.likes || 0}
+                {this.props.totallikes || 0}
               </span>
             </button>
           </div>
-        </a>
+        </Link>
       </div>
     )
   }
