@@ -7,8 +7,8 @@ const Submit = () => {
         <h1>Submit</h1>
         <p>Send in a recipe which may or may not be published!</p>
       </div>
-      <form name="submit" method="post">
-        <input type="hidden" name="form-name" value="submit" />
+      <form name="recipe-submit" method="post" action="/submit/">
+        <input type="hidden" name="form-name" value="recipe-submit" />
         <p>
           <label>
             Recipe name
@@ -36,7 +36,7 @@ const Submit = () => {
         <p>
           <label>
             Cookware needed
-            <input type="number" name="cookware" placeholder="4"></input>
+            <input type="number" name="cookware-number" placeholder="4"></input>
           </label>
         </p>
         <p>
