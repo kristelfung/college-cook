@@ -13,10 +13,7 @@ const Home = (props) => {
           {props.recipes.map(({fields}, i) => 
             <RecipeCard recipe={fields} 
               key={props.urlify(fields.name)} 
-              urlify={props.urlify}
-              changeLike={props.changeLike}
-              liked={props.urlify(fields.name) in props.userlikes}
-              totallikes={props.totallikes[props.urlify(fields.name)]}>
+              urlify={props.urlify}>
             </RecipeCard>
           )}
         </div>

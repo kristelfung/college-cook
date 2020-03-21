@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class RecipeCard extends Component {
-  handleClickLike = (e) => { 
-    e.preventDefault()
-    this.props.changeLike(this.props.urlify(this.props.recipe.name))
-  }
-
   render() {
     return (
       <div className="column">
@@ -17,14 +12,6 @@ class RecipeCard extends Component {
             <span className="time">{this.props.recipe.time} mins</span>
             <span className="cost">${this.props.recipe.cost}</span>
             <h2>{this.props.recipe.name}</h2>
-            <button className="recipe-card__like" onClick={this.handleClickLike}>
-              <span role="img" aria-label="thumbs-up" className="emoji">👍</span>
-              <span style={
-                this.props.liked ? {color: '#ff9e88'} : {color: '#ffffff'}
-              }>
-                {this.props.totallikes || 0}
-              </span>
-            </button>
           </div>
         </Link>
       </div>

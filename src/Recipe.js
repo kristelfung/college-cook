@@ -22,10 +22,6 @@ class Recipe extends Component {
     this.setState({windowSize: window.innerWidth})
   }
 
-  handleClickLike = () => {
-    this.props.changeLike(this.props.urlify(this.props.recipe.name))
-  }
-
   renderHeader = () => {
     if (this.state.windowSize < 800) {
       return [
@@ -38,20 +34,6 @@ class Recipe extends Component {
           <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
-              <button 
-                className="recipe-like" 
-                style={
-                  this.props.liked ? {backgroundColor: "#fd4c4c"} : {backgroundColor: "#efefef"}
-                }
-                onClick={this.handleClickLike}
-              >
-                <span className="emoji" role="img" aria-label="thumbs-up">👍</span>
-                <span className="recipe-like-num" style={
-                  this.props.liked ? {color: "#ffffff"} : {color: "#000000"}
-                }>
-                  {this.props.totallikes || 0}
-                </span>
-              </button>
           </div>
           <div className="recipe-details">
               <p>
@@ -88,20 +70,6 @@ class Recipe extends Component {
             <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
-              <button 
-                className="recipe-like" 
-                style={
-                  this.props.liked ? {backgroundColor: "#fd4c4c"} : {backgroundColor: "#efefef"}
-                }
-                onClick={this.handleClickLike}
-              >
-                <span className="emoji" role="img" aria-label="thumbs-up">👍</span>
-                <span className="recipe-like-num" style={
-                  this.props.liked ? {color: "#ffffff"} : {color: "#000000"}
-                }>
-                  {this.props.totallikes || 0}
-                </span>
-              </button>
             </div>
             <div className="recipe-details">
               <p>
