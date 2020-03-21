@@ -5,7 +5,6 @@ import Home from './Home';
 import FAQ from './FAQ';
 import Submit from './Submit';
 import Recipe from './Recipe';
-import Firebase from 'firebase';
 import logo from './images/logo.svg';
 import "./scss/styles.scss";
 
@@ -36,8 +35,8 @@ class CollegeCook extends Component {
   setPosts = (response) => {
     this.setState({
       recipes: response.items.filter(item => item.sys.contentType.sys.id === "recipe"),
-      faq: response.items.find(item => item.sys.contentType.sys.id === "faq"),
-      loading: false
+      faq: response.items.find(item => item.sys.contentType.sys.id === "faq")
+      //loading: false
     })
   }
 
@@ -48,7 +47,12 @@ class CollegeCook extends Component {
   render () {
     if (this.state.loading) {
       return (
-        <p>loading</p>
+        <div className="lds-wrapper">
+          <div className="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
       )
     }
     return (
