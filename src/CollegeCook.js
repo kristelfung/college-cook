@@ -237,7 +237,6 @@ class CollegeCook extends Component {
     return (
       <div className="body-wrap">
         <div className="content">
-        <button className="button" onClick={this.testing}>send</button>
           <Router>
             <nav className="navbar">
               <div className="container">
