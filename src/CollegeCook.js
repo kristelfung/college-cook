@@ -34,8 +34,53 @@ class CollegeCook extends Component {
 
   componentDidMount() {
     this.fetchPosts().then(this.setPosts)
-    this.startSession()  // create instance of user session w/ their likes!
     this.getTotalLikes()  // get total likes
+    this.startSession()  // create instance of user session w/ their likes!
+  }
+
+  componentWillUnmount() {
+    // fetch previous user data + compare to curr data to update globals
+    const uid = Firebase.auth().currentUser.uid
+    const ref = Firebase.database().ref('users/' + uid)
+
+    // update user likes in Firebase
+  }
+
+  testing = () => {
+    // fetch previous user data + compare to curr data to update globals
+    const uid = Firebase.auth().currentUser.uid
+    const ref = Firebase.database().ref('users/' + uid)
+    ref.once('value').then(snapshot => {
+      if (snapshot.exists()) { // if user has previously liked items...
+        // minus all previous session likes from global to "reset"
+        for (const key in snapshot.val()) {
+          const currRecipe = snapshot.val()[key]
+          const globalRef = Firebase.database().ref('/' + currRecipe)
+          globalRef.transaction((current_value) => {
+            return (current_value || 0) - 1
+          })
+        }
+        // add all local likes to global
+        for (const currRecipe in this.state.userlikes) {
+          const globalRef = Firebase.database().ref('/' + currRecipe)
+          globalRef.transaction((current_value) => {
+            return (current_value || 0) + 1
+          })
+        }
+        // update user's personal likes (first delete all, then push)
+        console.log(snapshot.val())
+      }
+      else if (Object.entries(this.state.userlikes).length >= 0) { // new user
+        for (const key in this.state.userlikes) {
+          ref.push(key)
+          let globalRef = Firebase.database().ref('/' + key)
+          globalRef.transaction((current_value) => {
+            return (current_value || 0) + 1
+          })
+        }
+      }// do nothing if user hasn't liked anything
+    })
+    // update user likes in Firebase
   }
 
   fetchPosts = () => this.client.getEntries()
@@ -192,6 +237,7 @@ class CollegeCook extends Component {
     return (
       <div className="body-wrap">
         <div className="content">
+        <button className="button" onClick={this.testing}>send</button>
           <Router>
             <nav className="navbar">
               <div className="container">
