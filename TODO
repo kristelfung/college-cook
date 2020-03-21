@@ -1,13 +1,9 @@
-NOW:
-- add google analytics
-- better loading please
-- really really need to create global likes field when new recipe is published
-- favicon 
-- filters
-- issue where liked recipes are not highlighted...WHY
-
-FUTURE:
-- custom submit page
-- check of steps in cooking process
-- perhaps a blog?
-- add meal prep friendly
+1. Better loading
+2. Favicon
+3. Likes
+4. Google analytics
+5. Filters
+6. Custom submit page
+7. Check of steps in cooking process
+8. Blog?
+9. Meal prep friendly
