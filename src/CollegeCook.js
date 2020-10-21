@@ -15,8 +15,8 @@ class CollegeCook extends Component {
     this.state = {
       recipes: [],
       filteredRecipes: [],
-      searchFilter: "",
-      durationFilter: 50,
+      nameFilter: "",
+      timeFilter: 50,
       costFilter: 7,
       faq: {},
       loading: true
@@ -43,22 +43,43 @@ class CollegeCook extends Component {
     })
   }
 
-  addSearchFilter = (param) => {
-    console.log(param)
+  addNameFilter = (param) => {
+    this.setState (
+      {
+        nameFilter: param.toLowerCase()
+      },
+      this.filter
+    )
+  }
+
+  addTimeFilter = (param) => {
     this.setState(
       {
-        searchFilter: param.toLowerCase()
+        timeFilter: param
+      },
+      this.filter
+    )
+  }
+
+  addCostFilter = (param) => {
+    this.setState(
+      {
+        costFilter: param
       },
       this.filter
     )
   }
 
   filter = () => {
-    let filter = this.state.searchFilter
+    let nameFilter = this.state.nameFilter
+    let timeFilter = this.state.timeFilter
+    let costFilter = this.state.costFilter
     let newRecipes = this.state.recipes
     newRecipes = newRecipes.filter(function(item) {
-      if (item.fields.name.toLowerCase().includes(filter)) 
-      {
+      const { name, cost, time } = item.fields
+      if (name.toLowerCase().includes(nameFilter) &&
+          cost <= costFilter &&
+          time <= timeFilter) {
           return item
       }
     })
@@ -104,7 +125,9 @@ class CollegeCook extends Component {
             <Route exact path="/" render={() => (
               <Home recipes={this.state.filteredRecipes} 
                 urlify={this.urlify}
-                addSearchFilter={this.addSearchFilter}
+                addNameFilter={this.addNameFilter}
+                addTimeFilter={this.addTimeFilter}
+                addCostFilter={this.addCostFilter}
               />
             )}/>
             <Route path="/faq/" render={() => (<FAQ data={this.state.faq.fields} />)}/>

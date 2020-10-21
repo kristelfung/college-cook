@@ -10,7 +10,11 @@ const Home = (props) => {
           <p>Affordable recipes that use the least amount of ingredients 
           and cookware possible.</p>
         </div>
-        <SearchBar addSearchFilter={props.addSearchFilter}/>
+        <SearchBar 
+          addNameFilter={props.addNameFilter}
+          addTimeFilter={props.addTimeFilter}
+          addCostFilter={props.addCostFilter}
+        />
         <div className="row">
           {props.recipes.map(({fields}, i) => 
             <RecipeCard recipe={fields} 
