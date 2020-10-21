@@ -71,9 +71,9 @@ class CollegeCook extends Component {
   }
 
   filter = () => {
-    let nameFilter = this.state.nameFilter
-    let timeFilter = this.state.timeFilter
-    let costFilter = this.state.costFilter
+    const nameFilter = this.state.nameFilter
+    const timeFilter = this.state.timeFilter
+    const costFilter = this.state.costFilter
     let newRecipes = this.state.recipes
     newRecipes = newRecipes.filter(function(item) {
       const { name, cost, time } = item.fields
