@@ -7,7 +7,7 @@ const Submit = () => {
         <h1>Submit</h1>
         <p>Send in a recipe which may or may not be published!</p>
       </div>
-      <form name="recipe-submit" method="post" action="/submit/">
+      <form name="recipe-submit" method="post" action="/submit/" className="submission">
         <input type="hidden" name="form-name" value="recipe-submit" required/>
         <p>
           <label>

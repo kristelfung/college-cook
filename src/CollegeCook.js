@@ -14,9 +14,11 @@ class CollegeCook extends Component {
 
     this.state = {
       recipes: [],
+      filteredRecipes: [],
+      searchFilter: "",
+      durationFilter: 50,
+      costFilter: 7,
       faq: {},
-      userlikes: {},
-      totallikes: {},
       loading: true
     }
   }
@@ -35,8 +37,33 @@ class CollegeCook extends Component {
   setPosts = (response) => {
     this.setState({
       recipes: response.items.filter(item => item.sys.contentType.sys.id === "recipe"),
+      filteredRecipes: response.items.filter(item => item.sys.contentType.sys.id === "recipe"),
       faq: response.items.find(item => item.sys.contentType.sys.id === "faq"),
       loading: false
+    })
+  }
+
+  addSearchFilter = (param) => {
+    console.log(param)
+    this.setState(
+      {
+        searchFilter: param.toLowerCase()
+      },
+      this.filter
+    )
+  }
+
+  filter = () => {
+    let filter = this.state.searchFilter
+    let newRecipes = this.state.recipes
+    newRecipes = newRecipes.filter(function(item) {
+      if (item.fields.name.toLowerCase().includes(filter)) 
+      {
+          return item
+      }
+    })
+    this.setState({
+        filteredRecipes: newRecipes
     })
   }
 
@@ -74,17 +101,18 @@ class CollegeCook extends Component {
                 </div>
               </div>
             </nav>
-            <Route exact path="/" component={() => (
-              <Home recipes={this.state.recipes} 
+            <Route exact path="/" render={() => (
+              <Home recipes={this.state.filteredRecipes} 
                 urlify={this.urlify}
+                addSearchFilter={this.addSearchFilter}
               />
             )}/>
-            <Route path="/faq/" component={() => (<FAQ data={this.state.faq.fields} />)}/>
-            <Route path="/submit/" component={Submit}/>
+            <Route path="/faq/" render={() => (<FAQ data={this.state.faq.fields} />)}/>
+            <Route path="/submit/" render={Submit}/>
             {this.state.recipes.map(({fields}, i) =>
               <Route path={"/" + this.urlify(fields.name) + "/"}
                 key={this.urlify(fields.name)}
-                component={() => (
+                render={() => (
                 <Recipe recipe={fields} 
                   urlify={this.urlify}
                 />)}
