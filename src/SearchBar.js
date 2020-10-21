@@ -3,7 +3,7 @@ import React from 'react';
 const SearchBar = (props) => {
   return (
     <div>
-      <form className="filters">
+      <form className="filters" onSubmit={e => { e.preventDefault();}}>
         <div className="filters--search">
           <span role="img" aria-label="magnifying-glass" className="emoji-magnifying">🔍</span>
           <input type="text" placeholder="Search..."
