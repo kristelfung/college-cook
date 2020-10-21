@@ -1,12 +1,8 @@
-.filters {
-  position: relative;
-}
-
 .emoji-magnifying {
   position: absolute;
-  top: 10px;
-  left: 15px;
   z-index: 1;
+  top: 19px;
+  left: 20px;
 }
 
 .filters input {
@@ -15,4 +11,33 @@
 
 .filters input::placeholder {
   color: black
+}
+
+// the three column layout but for search bar, padding tweaked
+.row--filter {
+  margin: -5px;
+  padding: 10px 0px;
+}
+
+.column--filter {
+  width: 25%;
+  padding: 5px;
+}
+
+.column--search {
+  width: 50%;
+  padding: 5px;
+  position: relative; // for emoji to work
+}
+
+@media screen and (max-width: $small-screen) {
+  .column--filter, .column--search {
+      width: 100%;
+      padding-top: 0px;
+      padding-bottom: 0px;
+  }
+  
+  .emoji-magnifying {
+    top: 14px;
+  }
 }
