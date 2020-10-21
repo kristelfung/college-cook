@@ -82,6 +82,7 @@ class CollegeCook extends Component {
           time <= timeFilter) {
           return item
       }
+      return null
     })
     this.setState({
         filteredRecipes: newRecipes
