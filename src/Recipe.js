@@ -34,6 +34,14 @@ class Recipe extends Component {
           <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
+              <button 
+                className="recipe-like"
+              >
+                <span className="emoji" role="img" aria-label="thumbs-up">👍</span>
+                <span className="recipe-like-num">
+                  0
+                </span>
+              </button>
           </div>
           <div className="recipe-details">
               <p>
@@ -70,6 +78,14 @@ class Recipe extends Component {
             <div className="recipe-title">
               <h1>{this.props.recipe.name}</h1>
               <p>by {this.props.recipe.author}</p>
+              <button 
+                className="recipe-like"
+              >
+                <span className="emoji" role="img" aria-label="thumbs-up">👍</span>
+                <span className="recipe-like-num">
+                  0
+                </span>
+              </button>
             </div>
             <div className="recipe-details">
               <p>

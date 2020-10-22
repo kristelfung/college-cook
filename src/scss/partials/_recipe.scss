@@ -44,11 +44,11 @@
   }
 }
 
-// .recipe-like {
-//   border-radius: 20px;
-//   padding-left: 10px;
-//   padding-right: 10px;
-// }
+.recipe-like {
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
 .recipe-details {
   display: flex;
@@ -66,11 +66,11 @@
   }
 }
 
-// .recipe-like-num {
-//   font-weight: bold;
-//   font-size: 18px;
-//   vertical-align: middle;
-// }
+.recipe-like-num {
+  font-weight: bold;
+  font-size: 18px;
+  vertical-align: middle;
+}
 
 .recipe-sidebar {
   width: 30%;
@@ -120,9 +120,9 @@
       margin-top: 0px;
     }
 
-    // .recipe-like {
-    //   margin: 8px 0px;
-    // }
+    .recipe-like {
+      margin: 8px 0px;
+    }
   }
 
   .recipe-details {

@@ -11,6 +11,10 @@ const RecipeCard = (props) => {
           <span className="time">{props.recipe.time} mins</span>
           <span className="cost">${props.recipe.cost}</span>
           <h2>{props.recipe.name}</h2>
+          <button className="recipe-card__like">
+            <span role="img" aria-label="thumbs-up" className="emoji">👍</span>
+            <span>0</span>
+          </button>
         </div>
       </Link>
     </div>
